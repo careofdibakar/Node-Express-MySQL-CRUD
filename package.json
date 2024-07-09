@@ -1,0 +1,27 @@
+{
+  "name": "node-express-mysql-crud",
+  "version": "1.0.0",
+  "description": "Basic crud operation using node, express and MySQL database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/careofdibakar/Node-Express-MySQL-CRUD.git"
+  },
+  "keywords": [
+    "\"crud\""
+  ],
+  "author": "Dibakar Das",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/careofdibakar/Node-Express-MySQL-CRUD/issues"
+  },
+  "homepage": "https://github.com/careofdibakar/Node-Express-MySQL-CRUD#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.4"
+  }
+}

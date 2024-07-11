@@ -5,6 +5,11 @@ exports.user_list = (req, res) => {
 };
 
 exports.add_user = (req, res) => {
-    // console.log(req.body);
-  res.json({ Requeste: req.body });
+    if(!req.body){
+      res.status(400).send({
+        "Error": "Empty Content"
+      })
+    }
+
+    
 };

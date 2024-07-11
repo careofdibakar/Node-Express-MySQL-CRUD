@@ -4,14 +4,14 @@ class User {
   constructor(user) {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
-    this.firstName = user.firstName;
     this.phoneNumber = user.phoneNumber;
     this.email = user.email;
+    this.status = user.status;
   }
 
   static create(newUser) {
     return new Promise((resolve, reject) => {
-      sql.query("INSERT INTO tutorials SET ?", newUser, (err, res) => {
+      sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
         if (err) {
           console.error("error: ", err);
           reject(err);
@@ -24,3 +24,5 @@ class User {
     });
   }
 }
+
+module.exports = User;

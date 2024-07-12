@@ -11,7 +11,7 @@ exports.add_user = (req, res) => {
     });
   }
 
-  const user = new User({
+  const newUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phoneNumber: req.body.phoneNumber,
@@ -19,17 +19,15 @@ exports.add_user = (req, res) => {
     status: req.body.status,
   });
 
-  // Save Tutorial in the database
-  User.create(user, (err, data) => {
-    if (err) {
+  User.create(newUser)
+    .then((data) => {
+      console.log("User created successfully:", data);
+      res.send(data); // Send response with inserted user data
+    })
+    .catch((err) => {
+      console.error("Error creating user:", err);
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial.",
+        message: err.message || "Some error occurred while creating the user.",
       });
-    } else {
-      console.log(11111111111111);
-      console.log(data);
-      res.send(data);
-    }
-  });
+    });
 };

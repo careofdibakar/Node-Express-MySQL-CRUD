@@ -18,7 +18,6 @@ class User {
           return;
         }
 
-        console.log("user created : ", { id: res.insertId, ...newUser });
         resolve({ id: res.insertId, ...newUser });
       });
     });

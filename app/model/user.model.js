@@ -1,27 +1,40 @@
 const sql = require("./db.js");
 
-class User {
-  constructor(user) {
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
-    this.phoneNumber = user.phoneNumber;
-    this.email = user.email;
-    this.status = user.status;
-  }
+const User = function (receivedData) {
+  this.firstName = receivedData.firstName;
+  this.lastName = receivedData.lastName;
+  this.phoneNumber = receivedData.phoneNumber;
+  this.email = receivedData.email;
+  this.status = receivedData.status;
+};
 
-  static create(newUser) {
-    return new Promise((resolve, reject) => {
-      sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-        if (err) {
-          console.error("error: ", err);
-          reject(err);
-          return;
-        }
+User.create = (newUser) => {
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
+      if (err) {
+        console.error("error: ", err);
+        reject(err);
+        return;
+      }
 
-        resolve({ id: res.insertId, ...newUser });
-      });
+      // resolve({ id: res.insertId, ...newUser });
+      resolve({ id: res.insertId });
     });
-  }
-}
+  });
+};
+
+User.getAll = () => {
+  return new Promise((resolve, rejected) => {
+    sql.query("SELECT * FROM user", (err, res) => {
+      if (err) {
+        console.error("error: ", err);
+        reject(err);
+        return;
+      }
+
+      resolve(res);
+    });
+  });
+};
 
 module.exports = User;

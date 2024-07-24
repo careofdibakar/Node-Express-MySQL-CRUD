@@ -3,9 +3,10 @@ module.exports = (app) => {
 
   const userController = require("../controller/user.controller.js");
 
-  router.get("/getUser", userController.user);
-  router.get("/getSingleUser", userController.fetchSingleuser);
-  router.post("/addUser", userController.add_user);
+  router.get("/user", userController.show);
+  router.post("/create-user", userController.create);
+  // router.put("/update-user", userController.update);
+  router.delete("/delete-user", userController.delete);
 
   app.use("/", router);
 };

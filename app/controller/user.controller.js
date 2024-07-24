@@ -1,6 +1,33 @@
 const User = require("../model/user.model");
 
-exports.add_user = (req, res) => {
+exports.show = (req, res) => {
+  let id = req.query.id ? req.query.id : null;
+  if (id) {
+    User.fetchSingle(id)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        console.error("Error creating user:", err);
+        res.status(500).send({
+          message: err.message || "Internal error",
+        });
+      });
+  } else {
+    User.fetchAll(id)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        console.error("Error creating user:", err);
+        res.status(500).send({
+          message: err.message || "Internal error",
+        });
+      });
+  }
+};
+
+exports.create = (req, res) => {
   if (!req.body) {
     res.status(400).send({
       Error: "Empty Content",
@@ -28,33 +55,18 @@ exports.add_user = (req, res) => {
     });
 };
 
-exports.user = (req, res) => {
-  User.getAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      console.error("Error creating user:", err);
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the user.",
-      });
-    });
-};
-
-exports.fetchSingleuser = (req, res) => {
-  let id = req.query.id;
-  User.getOne(id)
-    .then((data) => {
-      if (data && data.length > 0) {
+exports.delete = (req, res) => {
+  let id = req.query.id ? req.query.id : null;
+  if (id) {
+    User.delete(id)
+      .then((data) => {
         res.send(data);
-      } else {
-        res.send("No data found!");
-      }
-    })
-    .catch((err) => {
-      console.error("Error creating user:", err);
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the user.",
+      })
+      .catch((err) => {
+        console.error("Error creating user:", err);
+        res.status(500).send({
+          message: err.message || "Internal error",
+        });
       });
-    });
+  }
 };

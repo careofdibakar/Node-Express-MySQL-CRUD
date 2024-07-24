@@ -23,11 +23,11 @@ User.create = (newUser) => {
   });
 };
 
-User.getAll = () => {
-  return new Promise((resolve, rejected) => {
+User.fetchAll = () => {
+  return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM user", (err, res) => {
       if (err) {
-        console.error("error: ", err);
+        console.error("Error: ", err);
         reject(err);
         return;
       }
@@ -37,8 +37,8 @@ User.getAll = () => {
   });
 };
 
-User.getOne = (id) => {
-  return new Promise((resolve, rejected) => {
+User.fetchSingle = (id) => {
+  return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM user WHERE user.id =" + id, (err, res) => {
       if (err) {
         console.log("Error: ", err);
@@ -51,4 +51,17 @@ User.getOne = (id) => {
   });
 };
 
+User.delete = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM user WHERE `user`.`id` = " + id, (err, res) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+        return;
+      }
+
+      resolve(res);
+    });
+  });
+};
 module.exports = User;

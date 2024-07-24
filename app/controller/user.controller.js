@@ -40,3 +40,21 @@ exports.user = (req, res) => {
       });
     });
 };
+
+exports.fetchSingleuser = (req, res) => {
+  let id = req.query.id;
+  User.getOne(id)
+    .then((data) => {
+      if (data && data.length > 0) {
+        res.send(data);
+      } else {
+        res.send("No data found!");
+      }
+    })
+    .catch((err) => {
+      console.error("Error creating user:", err);
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the user.",
+      });
+    });
+};

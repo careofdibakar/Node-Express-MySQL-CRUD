@@ -37,4 +37,18 @@ User.getAll = () => {
   });
 };
 
+User.getOne = (id) => {
+  return new Promise((resolve, rejected) => {
+    sql.query("SELECT * FROM user WHERE user.id =" + id, (err, res) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+        return;
+      }
+
+      resolve(res);
+    });
+  });
+};
+
 module.exports = User;

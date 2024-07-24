@@ -4,6 +4,7 @@ module.exports = (app) => {
   const userController = require("../controller/user.controller.js");
 
   router.get("/getUser", userController.user);
+  router.get("/getSingleUser", userController.fetchSingleuser);
   router.post("/addUser", userController.add_user);
 
   app.use("/", router);

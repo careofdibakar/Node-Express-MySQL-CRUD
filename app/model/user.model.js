@@ -23,6 +23,33 @@ User.create = (newUser) => {
   });
 };
 
+User.modify = (userID, userData) => {
+  return new Promise((resolve, reject) => {
+    const query = `
+      UPDATE \`user\`
+      SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, status = ?
+      WHERE id = ?
+    `;
+
+    // Extract data to be updated
+    const { firstName, lastName, phoneNumber, email, status } = userData;
+    sql.query(
+      query,
+      [firstName, lastName, phoneNumber, email, status, userID],
+      (err, res) => {
+        if (err) {
+          console.error("error: ", err);
+          reject(err);
+          return;
+        }
+
+        // resolve({ id: res.insertId, ...newUser });
+        resolve({ id: res.insertId });
+      }
+    );
+  });
+};
+
 User.fetchAll = () => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM user", (err, res) => {

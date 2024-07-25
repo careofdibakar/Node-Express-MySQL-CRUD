@@ -5,7 +5,7 @@ module.exports = (app) => {
 
   router.get("/user", userController.show);
   router.post("/create-user", userController.create);
-  // router.put("/update-user", userController.update);
+  router.put("/update-user", userController.update);
   router.delete("/delete-user", userController.delete);
 
   app.use("/", router);

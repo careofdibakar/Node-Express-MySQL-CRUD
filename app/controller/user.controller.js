@@ -62,14 +62,6 @@ exports.update = (req, res) => {
     });
   }
 
-  // const newUser = new User({
-  //   firstName: req.body.firstName,
-  //   lastName: req.body.lastName,
-  //   phoneNumber: req.body.phoneNumber,
-  //   email: req.body.email,
-  //   status: req.body.status,
-  // });
-
   let userID = req.query.id ? req.query.id : "";
   let userData = {};
   userData.firstName = req.body.firstName || null;
